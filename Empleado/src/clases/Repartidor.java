@@ -10,10 +10,16 @@ public class Repartidor extends Empleado {
 	//Constructor sin parámetros
 	public Repartidor() {
 		super();
+		this.zona = "";
+		this.matricula = "";
+		this.kminicioMes = 0;
+		this.kmFinales = 0;
+		this.dietas = 0;
 	}
 	// Constructor con todos los parámetros invocando superclase
-	public Repartidor(String nombre, String apellido, int edad, double salario, int antiguedad_años, String zona,
-			String matricula, double kminicioMes, double kmFinales, double dietas) {
+	public Repartidor(String nombre, String apellido, int edad, double salario, 
+			int antiguedad_años, String zona, String matricula, double kminicioMes,
+			double kmFinales, double dietas) {
 		super(nombre, apellido, edad, salario, antiguedad_años);
 		this.zona = zona;
 		this.matricula = matricula;
@@ -21,10 +27,21 @@ public class Repartidor extends Empleado {
 		this.kmFinales = kmFinales;
 		this.dietas = dietas;
 	}
+	
+	// Constructor sin antiguedad y sin km y sin dietas ya que son inicializadas a 0
+
+	public Repartidor(String nombre, String apellido, int edad, double salario, String zona, String matricula) {
+		super(nombre, apellido, edad, salario);
+		this.zona = zona;
+		this.matricula = matricula;
+		this.kminicioMes=0;
+		this.kmFinales=0;
+		this.dietas=0;
+	}
 			
 	//Constructor de copia
 	public Repartidor(Repartidor r) {
-		super();
+		super(r);
 		this.zona=r.zona;
 		this.matricula=r.matricula;
 		this.kminicioMes=r.kminicioMes;
@@ -32,21 +49,22 @@ public class Repartidor extends Empleado {
 		this.dietas=r.dietas;
 	}
 	
-	//Sobrescribe el método toString
 	@Override
 	public String toString() {
-		return "Repartidor [zona=" + zona + ", matricula=" + matricula + ", kminicioMes=" + kminicioMes + ", kmFinales="
-				+ kmFinales + ", dietas=" + dietas + "]";
+		return "Repartidor [nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", salario=" + salario
+				+ ", antiguedad_años=" + antiguedad_años + ", zona=" + zona + ", matricula=" + matricula
+				+ ", kminicioMes=" + kminicioMes + ", kmFinales=" + kmFinales + ", dietas=" + dietas + "]";
 	}
-	//getters y setters
 	
+	//getters y setters
+	public double getKmFinales() {
+		return kmFinales;
+	}
 	
 	public double getDietas() {
 		return dietas;
 	}
-	public void setDietas(double dietas) {
-		this.dietas = dietas;
-	}
+	
 	public String getZona() {
 		return zona;
 	}
@@ -62,13 +80,17 @@ public class Repartidor extends Empleado {
 	
 	//Método añadirDieta
 	public void añadirDieta(double dieta) {
-		double totaldietas=this.dietas+dieta;
-		if (totaldietas>25) {
-			this.dietas=25;
+		
+		if (dieta>25) {
+			this.dietas=this.dietas+25;
 		}else {
 		this.dietas=this.dietas+dieta;
 		}
 		
+	}
+	// Método para reiniciar las dietas
+	public void reiniciarDietas() {
+		this.dietas=0;
 	}
 	
 	// Método actualizaKms
@@ -77,10 +99,15 @@ public class Repartidor extends Empleado {
 			this.kmFinales=km;
 		}
 	}
+	// Método actualización km a fin de mes
+	public void reiniciarKm() {
+		this.kminicioMes=this.kmFinales;
+	}
+	
 	//Sobrescribe el metodo calculaSalario()
 	public double calculaSalario() {
 		double km = 0.45*(this.kmFinales-this.kminicioMes);
-		return this.getSalario()+this.dietas+km;
+		return this.salario+this.dietas+km;
 	}
 	
 	

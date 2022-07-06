@@ -1,16 +1,25 @@
 package clases;
 
 public class Empleado {
-	private String nombre;
-	private String apellido;
-	private int edad;
-	private double salario;
-	private int antiguedad_años;
+	protected String nombre;
+	protected String apellido;
+	protected int edad;
+	protected double salario;
+	protected int antiguedad_años;
+	
+	public static final double factorTrienio1=0.05;
+	public static final double factorTrienio2=0.08;
+	
 	
 	
 	// Constructor sin parámetros
 	public Empleado() {
 		super();
+		this.nombre = "";
+		this.apellido = "";
+		this.edad = 0;
+		this.salario = 0;
+		this.antiguedad_años = 0;
 	}
 
 
@@ -22,6 +31,15 @@ public class Empleado {
 		this.edad = edad;
 		this.salario = salario;
 		this.antiguedad_años = antiguedad_años;
+	}
+	// Constructor con la antiguedad a 0 por defecto:
+	public Empleado(String nombre, String apellido, int edad, double salario) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.edad = edad;
+		this.salario = salario;
+		this.antiguedad_años=0;
 	}
 	
 	//Constructor de copia
@@ -90,23 +108,31 @@ public class Empleado {
 				+ ", antiguedad_años=" + antiguedad_años + "]";
 	}
 
-	//Método calculaTrienios
+	/**
+	 * Método calculaTrienios que calcula el dinero que se lleva un empleado cada 3 años
+	 * trabajados en la empresa
+	 * @return int importe trienios en euros
+	 */
 	public double calculaTrienios() {
 		int trienios=this.antiguedad_años/3;
 		double importe_tri=0;
 		double sal=this.salario;
 		
-		for (int i=0;i<=trienios;i++) {
+		for (int i=1;i<=trienios;i++) {
 			sal=salario+importe_tri;
 			if (i<=5) { 
-			importe_tri=importe_tri+sal*0.05;
+			importe_tri=importe_tri+sal*factorTrienio1;
 			}else {
-			importe_tri=importe_tri+sal*0.08;
+			importe_tri=importe_tri+sal*factorTrienio2;
 			}
 		}
 		return importe_tri;
 		}
-	//Método calculaSalario
+	
+	/**
+	 * Método calculaSalario suma el salario del empleado más los trienios que tiene
+	 * @return double Salario total en euros
+	 */
 	public double calculaSalario() {
 		return this.salario+this.calculaTrienios();
 		
