@@ -1,5 +1,6 @@
 package main;
 
+import clases.Comercial;
 import clases.Empleado;
 
 public class PruebaEmpleado {
@@ -18,6 +19,17 @@ public class PruebaEmpleado {
 		emp.setAntiguedad_años(22);
 		
 		System.out.printf("El salario de Carlos es: %.2f ",emp.calculaSalario());
+		
+		Empleado e = new Comercial("Sonia","Mendez",34,1200,3,4);
+		
+		System.out.println("Añadiendo ventas");
+		
+		// hay que hacer una conversion ya que la variable e es Empleado y las ventas
+		//es un método de Comercial
+		((Comercial)e).contabilizaVentas(8);
+		//Por el poliformismo el calculaSalario es de Comercial no necesitamos hacer la conversion
+		
+		System.out.println("El salario de Sonia es:"+e.calculaSalario());
 		
 		
 

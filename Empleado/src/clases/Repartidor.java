@@ -60,6 +60,9 @@ public class Repartidor extends Empleado {
 	public double getKmFinales() {
 		return kmFinales;
 	}
+	public double getKminicioMes() {
+		return kminicioMes;
+	}
 	
 	public double getDietas() {
 		return dietas;
