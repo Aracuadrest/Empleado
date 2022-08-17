@@ -40,14 +40,14 @@ public class Comercial extends Empleado {
 		return "Comercial [nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", salario=" + salario
 				+ ", antiguedad_años=" + antiguedad_años + ", numero_ventas=" + numero_ventas + "]";
 	}
-
-	// getters 
+	
+	
+	// getters y setters
 
 	public int getNumero_ventas() {
 		return numero_ventas;
 	}
 	
-
 	public static void setImporteVentas(double importeVentas) {
 		Comercial.importeVentas = importeVentas;
 	}
